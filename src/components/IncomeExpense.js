@@ -19,11 +19,11 @@ function IncomeExpense() {
     <div className="income-wrapper">
       <div>
         <h4>Income</h4>
-        <h3>{currency(income)}</h3>
+        <h3 style={{ color: "green" }}>{currency(income)}</h3>
       </div>
       <div>
         <h4>Expense</h4>
-        <h3 style={{ color: "salmon" }}>-{currency(Math.abs(spending))}</h3>
+        <h3 style={{ color: "red" }}>{currency(Math.abs(spending))}</h3>
       </div>
     </div>
   );

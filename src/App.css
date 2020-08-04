@@ -99,7 +99,7 @@ h3 {
   position: relative;
   padding: 1rem;
   margin: 10px auto;
-  width: 150px;
+  max-width: 180px;
 }
 
 .list li.plus {
