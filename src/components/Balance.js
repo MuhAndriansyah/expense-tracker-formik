@@ -9,8 +9,6 @@ function Balance() {
   const totalBalance = amount
     .reduce((accumulator, value) => accumulator + value, 0)
 
-
-  console.log(amount);
   return (
     <div className="balance">
       <h4>YOUR BALANCE</h4>

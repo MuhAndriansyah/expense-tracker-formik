@@ -3,7 +3,7 @@ import { useExpense } from "../context/GlobalState";
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 function AddTransaction() {
-  const { addTransaction } = useExpense();
+  const { dispatch } = useExpense();
 
   const initialValues = {
     text: "",
@@ -19,12 +19,7 @@ function AddTransaction() {
   const onSubmit = (values, onSubmitProps) => {
     const { text, amount } = values;
 
-    const newTransaction = {
-      id: Math.floor(Math.random() * 100000),
-      text,
-      amount
-    };
-    addTransaction(newTransaction);
+    dispatch({ type: 'ADD_TRANSACTION', transaction: { text, amount } })
     onSubmitProps.resetForm();
   };
 

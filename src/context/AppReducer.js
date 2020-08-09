@@ -1,19 +1,16 @@
+import uuid from 'uuid/v4';
+
 export default (state, action) => {
-  console.log(action.payload);
   switch (action.type) {
     case "DELETE_TRANSACTION":
-      return {
-        ...state,
-        transactions: state.transactions.filter(
-          transaction => transaction.id !== action.payload
-        )
-      };
+      return state.filter(transaction => transaction.id !== action.id);
 
     case "ADD_TRANSACTION":
-      return {
-        ...state,
-        transactions: [...state.transactions, action.payload]
-      };
+      return [...state, {
+        text: action.transaction.text,
+        amount: action.transaction.amount,
+        id: uuid()
+      }]
 
     default:
       return state;

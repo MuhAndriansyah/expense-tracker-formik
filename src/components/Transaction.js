@@ -3,7 +3,7 @@ import { useExpense } from "../context/GlobalState";
 import { currency } from '../utils/Formatter';
 
 function Transaction({ transaction }) {
-  const { deleteTransaction } = useExpense();
+  const { dispatch } = useExpense();
 
   const sign = transaction.amount > 0 ? "+" : "-";
 
@@ -15,7 +15,7 @@ function Transaction({ transaction }) {
         {currency(Math.abs(transaction.amount))}
       </p>
       <button
-        onClick={() => deleteTransaction(transaction.id)}
+        onClick={() => dispatch({ type: 'DELETE_TRANSACTION', id: transaction.id })}
         className="delete-btn"
       >
         x

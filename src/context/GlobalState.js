@@ -1,11 +1,5 @@
-import React, { createContext, useContext, useReducer } from "react";
+import React, { createContext, useContext, useReducer, useEffect } from "react";
 import AppReducer from "./AppReducer";
-const initialValue = {
-  transactions: [
-    { id: 1, text: "Gaji", amount: 6500000 },
-    { id: 2, text: "Iphone SE", amount: -8500000 },
-  ]
-};
 
 const ExpenseContext = createContext();
 
@@ -14,28 +8,21 @@ export const useExpense = () => {
 };
 
 const GlobalState = ({ children }) => {
-  const [state, dispatch] = useReducer(AppReducer, initialValue);
+  const [transactions, dispatch] = useReducer(AppReducer, [], () => {
+    const localData = localStorage.getItem('transactions');
 
-  function deleteTransaction(id) {
-    dispatch({
-      type: "DELETE_TRANSACTION",
-      payload: id
-    });
-  }
+    return localData ? JSON.parse(localData) : [];
+  });
 
-  function addTransaction(transaction) {
-    dispatch({
-      type: "ADD_TRANSACTION",
-      payload: transaction
-    });
-  }
+
+  useEffect(() => {
+    localStorage.setItem('transactions', JSON.stringify(transactions))
+  }, [transactions])
 
   return (
     <ExpenseContext.Provider
       value={{
-        transactions: state.transactions,
-        deleteTransaction,
-        addTransaction
+        transactions, dispatch
       }}
     >
       {children}
